@@ -17,6 +17,15 @@ pub const LEVEL_DEFAULT: Compression = Compression::fast();
 pub const SEPARATOR_DEFAULT: u8 = b'\n';
 pub const BUF_SIZE_DEFAULT: usize = 4096;
 
+/// Lines -> Chunks -> Gzips -> Writer.
+///
+/// # Arguments
+/// - lines: The iterator of lines(bytes).
+/// - wtr: The target writer.
+/// - buf: The buffer for gzip.
+/// - chunk_size: The number of lines in a page(chunk).
+/// - level: The compression level(e.g, fast, best, ...).
+/// - sep: The "line" separator(e.g, '\n', '\0', ...).
 pub fn lines2pages2gz2wtr<I, W>(
     lines: I,
     mut wtr: W,
